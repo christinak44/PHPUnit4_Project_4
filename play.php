@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+include 'inc/Game.php';
+include 'inc/Phrase.php';
+ ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -14,6 +18,13 @@
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
     </div>
+  <?php
+  $phrase = new Phrase();
+  $game = new Game($phrase);
+  echo $phrase->addPhraseToDisplay();
+  //var_dump($phrase);
+  //var_dump($game);
+  ?>
 </div>
 
 </body>
