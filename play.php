@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
-//add 'clicked' letters to array
+//$_SESSION['selected'] = array();
 if (!isset($_SESSION['selected'])) {
     $_SESSION['selected'] = array();
 }
+//add 'clicked' letters to array
 if(isset($_POST['key'])){
-   //$_SESSION['selected'] = array();
   array_push($_SESSION['selected'] = $_POST['key']);
 
 } else {session_destroy();}
