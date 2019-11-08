@@ -2,9 +2,15 @@
 <?php
 session_start();
 //add 'clicked' letters to array
-if(isset($_POST['key'])){
-   $_SESSION['selected'] = $_POST['key'];
+if (!isset($_SESSION['selected'])) {
+    $_SESSION['selected'] = array();
 }
+if(isset($_POST['key'])){
+   //$_SESSION['selected'] = array();
+  array_push($_SESSION['selected'] = $_POST['key']);
+
+} else {session_destroy();}
+
 include 'inc/Game.php';
 include 'inc/Phrase.php';
  ?>
