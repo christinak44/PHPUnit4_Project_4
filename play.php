@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <?php
 session_start();
-//$_SESSION['selected'] = array();
-if (!isset($_SESSION['selected'])) {
-    $_SESSION['selected'] = array();
-}
-//add 'clicked' letters to array
-if(isset($_POST['key'])){
-  array_push($_SESSION['selected'] = $_POST['key']);
 
-} else {session_destroy();}
-
-include 'inc/Game.php';
 include 'inc/Phrase.php';
+include 'inc/Game.php';
+
+if (isset($_SESSION['selected']) && isset($_POST['key'])) {
+    $_SESSION['selected'][] = $_POST['key'];
+} else {
+    $_SESSION['selected'] = [];
+}
+
+$_SESSION['phrase'] =  "start small";
+$phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+$game = new Game($phrase);
+// session_destroy();
  ?>
 <html lang="en">
 <head>
@@ -30,10 +32,10 @@ include 'inc/Phrase.php';
         <h2 class="header">Phrase Hunter</h2>
     </div>
   <?php
-  $phrase = new Phrase();
-  $game = new Game($phrase);
-  //var_dump($phrase);
-  //var_dump($game);
+  //$phrase = new Phrase();
+  //$game = new Game($phrase);
+  var_dump($phrase);
+  var_dump($game);
   echo $phrase->addPhraseToDisplay();
   ?>
 

@@ -4,7 +4,7 @@ private $phrase;
 private $lives = 5;
 
 //set phrase in play
-public function __construct($phrase = null)
+public function __construct($phrase)
 {
 
        $this->phrase = $phrase;
