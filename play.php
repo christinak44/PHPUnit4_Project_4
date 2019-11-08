@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <?php
+session_start();
+//add 'clicked' letters to array
+if(isset($_POST['key'])){
+   $_SESSION['selected'] = $_POST['key'];
+}
 include 'inc/Game.php';
 include 'inc/Phrase.php';
  ?>
@@ -21,10 +26,19 @@ include 'inc/Phrase.php';
   <?php
   $phrase = new Phrase();
   $game = new Game($phrase);
-  echo $phrase->addPhraseToDisplay();
   //var_dump($phrase);
   //var_dump($game);
+  echo $phrase->addPhraseToDisplay();
   ?>
+
+  <!--<form method= 'POST' action='play.php'>-->
+  <?php
+  var_dump($_SESSION);
+  echo $game->displayKeyboard();
+  echo $game->displayScore();
+  //var_dump($_POST);
+  ?>
+<!--</form>-->
 </div>
 
 </body>

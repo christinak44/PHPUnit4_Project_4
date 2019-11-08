@@ -2,9 +2,9 @@
 class Phrase {
 
 private $currentPhrase;
-private $phrase;
 private $selected = array();
 
+//phrase creation
 public function __construct($currentPhrase = null, $selected = null)
 {
 
@@ -14,11 +14,12 @@ public function __construct($currentPhrase = null, $selected = null)
        $this->selected[] = $selected;
    }
    if (!isset($phrase)) {
-       $this->phrase = "dream big";
+       $this->currentPhrase = "dream big";
    }
 
 
 }
+//ready phrase for game play
 public function addPhraseToDisplay()
 {
    $characters = str_split(strtolower($this->currentPhrase));
@@ -30,7 +31,7 @@ public function addPhraseToDisplay()
    } else if ($character == " ") {
        $output .= "<li class='space'>" . $character . "</li>";
    } else {
-     $output .= "<li class='hide'>" . $character . "</li>";
+     $output .= "<li class='hide letter'>" . $character . "</li>";
      }
 
    }
