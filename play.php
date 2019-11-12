@@ -1,7 +1,10 @@
-<!DOCTYPE html>
 <?php
-session_start();
 
+session_start();
+if ($_POST['start']) {
+    unset($_SESSION['selected']);
+    unset($_SESSION['phrase']);
+}
 include 'inc/Phrase.php';
 include 'inc/Game.php';
 
@@ -11,11 +14,13 @@ if (isset($_SESSION['selected']) && isset($_POST['key'])) {
     $_SESSION['selected'] = [];
 }
 
-$_SESSION['phrase'] =  "start small";
+
 $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+$_SESSION['phrase'] =  $phrase->currentPhrase/*"start small"*/;
 $game = new Game($phrase);
-// session_destroy();
+ //session_destroy();
  ?>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -34,14 +39,15 @@ $game = new Game($phrase);
   <?php
   //$phrase = new Phrase();
   //$game = new Game($phrase);
-  var_dump($phrase);
+  //var_dump($phrase);
   var_dump($game);
   echo $phrase->addPhraseToDisplay();
   ?>
 
   <!--<form method= 'POST' action='play.php'>-->
   <?php
-  var_dump($_SESSION);
+  //var_dump($_SESSION);
+
   echo $game->displayKeyboard();
   echo $game->displayScore();
   //var_dump($_POST);

@@ -1,20 +1,27 @@
 <?php
 class Phrase {
 
-private $currentPhrase;
+public $currentPhrase;
 private $selected = array();
+public $phrases = [
+            'Boldness be my friend',
+            'Leave no stone unturned',
+            'Broken crayons still color',
+            'The adventure begins',
+            'Dream without fear',
+            'Love without limits'
+    ];
 
 //phrase creation
-public function __construct($currentPhrase = null, $selected = null)
+public function __construct($phrase = null, $selected = [])
 {
 
-
-   if (!empty($currentPhrase) && !empty($selected)) {
-       $this->currentPhrase = $phrase;
-       $this->selected[] = $selected;
-   }
    if (!isset($phrase)) {
-       $this->currentPhrase = "dream big";
+       $autoPhrase = array_rand($this->phrases);
+       $this->currentPhrase = $this->phrases[$autoPhrase];
+   } else {
+       $this->currentPhrase = $phrase;
+       $this->selected = $selected;
    }
 
 
@@ -27,7 +34,7 @@ public function addPhraseToDisplay()
    $output .= "<ul>";
    foreach ($characters as $character) {
    if (in_array($character, $this->selected)) {
-       $output .= "<li class='hide letter'>" . $character . "</li>";
+       $output .= "<li class='show letter'>" . $character . "</li>";
    } else if ($character == " ") {
        $output .= "<li class='space'>" . $character . "</li>";
    } else {
@@ -39,7 +46,41 @@ public function addPhraseToDisplay()
    $output .= "</div>";
    return $output;
 }
+public function getLetterArray()
+{
+  return array_unique(str_split(str_replace(
+             ' ',
+             '',
+             strtolower($this->currentPhrase)
+    )));
+}
+public function checkLetter($letter)
+{
+if (in_array($letter, $this->getLetterArray())) {
+    return true;
+  } else {return false;}
 
+}
+/*public function addSelected($string)
+{
+  $this->selected[] = $string;
+}*/
+public function __get($selected)
+{
+    return $this->selected;
+}
+/*public function __get($currentPhrase)
+{
+    return $this->currentPhrase;
+}*/
+/*public function __get($phrases)
+{
+    return $this->phrases;
+}*/
+/*public function numberLost()
+{
+  return count(array_diff($this->selected, $this->getLetterArray()));
+}*/
 
 }
  ?>

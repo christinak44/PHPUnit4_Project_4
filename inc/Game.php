@@ -11,8 +11,47 @@ public function __construct($phrase)
 }
 //create keyboard for game play
 public function displayKeyboard()
-{
-  $this->html = "<form method= 'POST' action='play.php'>";
+{//update per step 10, now that key handling method created internal function used to display each keyboard letter
+  $output = "";
+        $output .= "<form method='post' action='play.php'>";
+        $output .= "<div id='qwerty' class='section'>";
+        $output .= "<div class='keyrow'>";
+        $output .= $this->keyPress('q');
+        $output .= $this->keyPress('w');
+        $output .= $this->keyPress('e');
+        $output .= $this->keyPress('r');
+        $output .= $this->keyPress('t');
+        $output .= $this->keyPress('y');
+        $output .= $this->keyPress('u');
+        $output .= $this->keyPress('i');
+        $output .= $this->keyPress('o');
+        $output .= $this->keyPress('p');
+        $output .= "</div>";
+        $output .= "<div class='keyrow'>";
+        $output .= $this->keyPress('a');
+        $output .= $this->keyPress('s');
+        $output .= $this->keyPress('d');
+        $output .= $this->keyPress('f');
+        $output .= $this->keyPress('g');
+        $output .= $this->keyPress('h');
+        $output .= $this->keyPress('j');
+        $output .= $this->keyPress('k');
+        $output .= $this->keyPress('l');
+        $output .= "</div>";
+        $output .= "<div class='keyrow'>";
+        $output .= $this->keyPress('z');
+        $output .= $this->keyPress('x');
+        $output .= $this->keyPress('c');
+        $output .= $this->keyPress('v');
+        $output .= $this->keyPress('b');
+        $output .= $this->keyPress('n');
+        $output .= $this->keyPress('m');
+        $output .= "</div>";
+        $output .= "</div>";
+        $output .= "</form>";
+        return $output;
+//original code below used for testing
+  /*$this->html = "<form method= 'POST' action='play.php'>";
     $this->html .= '<div id="qwerty" class="section">';
       $this->html .= '<div class="keyrow">';
       $this->html .= '<button name="key" value="q" class="key">q</button>';
@@ -50,7 +89,7 @@ public function displayKeyboard()
       $this->html .= '</div>';
     $this->html .= '</div>';
    $this->html .= '</form>';
-    return $this->html;
+    return $this->html;*/
 }
 //creates visual of lives remaining
 public function displayScore()
@@ -65,12 +104,19 @@ public function displayScore()
         $output .= '</ol></div>';
 		return $output;
 }
+public function keyPress($letterKey)
+{
+  if (!in_array($letterKey, $this->phrase->selected)){
+      return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key'></button>";
+  } else {
+          if ($this->phrase->checkLetter($letterKey)) {
+             return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key correct' disabled></button>";
+    } else { return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key incorrect' disabled></button>";
+  }
 
-
-
-
-
+ }
+}
 
 
 }
- ?>
+?>
