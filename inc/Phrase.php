@@ -2,7 +2,7 @@
 class Phrase {
 
 public $currentPhrase;
-private $selected = array();
+public $selected = array();
 public $phrases = [
             'Boldness be my friend',
             'Leave no stone unturned',
@@ -61,26 +61,12 @@ if (in_array($letter, $this->getLetterArray())) {
   } else {return false;}
 
 }
-/*public function addSelected($string)
-{
-  $this->selected[] = $string;
-}*/
-public function __get($selected)
-{
-    return $this->selected;
-}
-/*public function __get($currentPhrase)
-{
-    return $this->currentPhrase;
-}*/
-/*public function __get($phrases)
-{
-    return $this->phrases;
-}*/
-/*public function numberLost()
+
+
+public function numberLost()
 {
   return count(array_diff($this->selected, $this->getLetterArray()));
-}*/
+}
 
 }
  ?>

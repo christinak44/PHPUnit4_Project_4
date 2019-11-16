@@ -98,9 +98,14 @@ public function displayScore()
         $output .= '<div id="scoreboard" class="section">';
         $output .= '<ol>';
 
-          for ($i == 1; $i < $this->lives; $i++) {
+          for ($i == 1; $i <= ($this->lives - $this->phrase->numberLost()); $i++) {
                 $output .= '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
-          }
+            }
+               /*for ($i == $this->phrase->numberLost();; $i++){
+                   $output .= "<li class='tries'><img src='images/lostHeart.png' height='35px' width='30px'></li>";
+               }*/
+
+
         $output .= '</ol></div>';
 		return $output;
 }
@@ -116,7 +121,9 @@ public function keyPress($letterKey)
 
  }
 }
-
-
+public function __get($lives)
+{
+  return $this->lives;
+}
 }
 ?>
