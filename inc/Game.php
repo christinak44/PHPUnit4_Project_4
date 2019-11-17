@@ -98,12 +98,14 @@ public function displayScore()
         $output .= '<div id="scoreboard" class="section">';
         $output .= '<ol>';
 
-          for ($i == 1; $i <= ($this->lives - $this->phrase->numberLost()); $i++) {
+          for ($i = 1; $i <= ($this->lives - $this->phrase->numberLost()); $i++) {
                 $output .= '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
+
             }
-               /*for ($i == $this->phrase->numberLost();; $i++){
+               for ($i = 0; $i < $this->phrase->numberLost(); $i++){
                    $output .= "<li class='tries'><img src='images/lostHeart.png' height='35px' width='30px'></li>";
-               }*/
+
+               }
 
 
         $output .= '</ol></div>';
@@ -116,11 +118,30 @@ public function keyPress($letterKey)
   } else {
           if ($this->phrase->checkLetter($letterKey)) {
              return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key correct' disabled></button>";
-    } else { return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key incorrect' disabled></button>";
-  }
+           } else {  return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key incorrect' disabled></button>";
+                     $this->lives--;
 
- }
+
+      }
+
+    }
 }
+public function checkForLose()
+{
+  if ($this->lives == $this->phrase->numberLost()) {
+      return true;
+  } else {
+          return false;
+    }
+}
+/*public function gameOver()
+{
+  if ($this->checkForLose() == true) {
+    echo '<h1 id="game-over-message">Congratulations on guessing: "' . $this->phrase . '"</h1>';
+  } /*else if {
+    echo '<h1 id="game-over-message">The phrase was: "' . $phrase . '" Better luck next time!</h1>';
+  }*/
+//}
 public function __get($lives)
 {
   return $this->lives;

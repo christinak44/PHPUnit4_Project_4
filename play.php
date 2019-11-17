@@ -18,6 +18,7 @@ if (isset($_SESSION['selected']) && isset($_POST['key'])) {
 $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
 $_SESSION['phrase'] =  $phrase->currentPhrase/*"start small"*/;
 $game = new Game($phrase);
+$_SESSION['lives'] = $game->__get($lives);
  //session_destroy();
  ?>
  <!DOCTYPE html>
@@ -40,6 +41,13 @@ $game = new Game($phrase);
   //$phrase = new Phrase();
   //$game = new Game($phrase);
   //var_dump($phrase);
+  echo ini_get('display_errors');
+
+if (!ini_get('display_errors')) {
+    ini_set('display_errors', '1');
+}
+
+echo ini_get('display_errors');
   var_dump($game);
   echo $phrase->addPhraseToDisplay();
   ?>
@@ -50,7 +58,8 @@ $game = new Game($phrase);
 
   echo $game->displayKeyboard();
   echo $game->displayScore();
-  var_dump($game->lives - $phrase->numberLost());
+  //echo $game->gameOver();
+  var_dump($game->checkForLose());
   ?>
 <!--</form>-->
 </div>
