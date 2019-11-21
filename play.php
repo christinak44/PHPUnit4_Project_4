@@ -32,7 +32,7 @@ $_SESSION['lives'] = $game->__get($lives);
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
-<body>
+<body onkeydown='function(event)'>
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
@@ -51,14 +51,25 @@ echo ini_get('display_errors');
   var_dump($game);
   echo $phrase->addPhraseToDisplay();
   ?>
-
+<script>
+document.onkeydown = function(event) {
+  var keys = document.getElementsByClassName('key');
+  for(i= 0; i < keys.length; i++) {
+      var key_press = String.fromCharCode(event.keyCode);
+      var key = keys[i].innnerText;
+      if(key_press == key) {
+        keys[i].click();
+      }
+  }
+}
+</script>
   <!--<form method= 'POST' action='play.php'>-->
   <?php
   //var_dump($_SESSION);
 
   echo $game->displayKeyboard();
   echo $game->displayScore();
-  //echo $game->gameOver();
+  echo $game->gameOver();
   var_dump($game->checkForLose());
   ?>
 <!--</form>-->

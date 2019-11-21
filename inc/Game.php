@@ -134,14 +134,28 @@ public function checkForLose()
           return false;
     }
 }
-/*public function gameOver()
+public function checkForWin()
+{
+  if (count(array_intersect($this->phrase->selected, $this->phrase->getLetterArray())) == count($this->phrase->getLetterArray())) {
+      return true;
+  } else {
+          return false;
+    }
+}
+public function gameOver()
 {
   if ($this->checkForLose() == true) {
-    echo '<h1 id="game-over-message">Congratulations on guessing: "' . $this->phrase . '"</h1>';
-  } /*else if {
-    echo '<h1 id="game-over-message">The phrase was: "' . $phrase . '" Better luck next time!</h1>';
-  }*/
-//}
+    echo '<div id="overlay" class="lose a"><h1 id="game-over-message">The phrase was: "' . $this->phrase->currentPhrase . '"Better luck next time!</h1>';
+    echo '<form method="post" action="play.php">
+        <input id="btn__reset" type="submit" name="start" value="Play Again" />
+    </form></div>';
+  } else if ($this->checkForWin() == true){
+    echo '<div id="overlay" class="win a"><h1 id="game-over-message">Congratulations on guessing: "' . $this->phrase->currentPhrase . '"</h1>';
+    echo '<form method="post" action="play.php">
+        <input id="btn__reset" type="submit" name="start" value="Play Again" />
+    </form></div>';
+  }
+}
 public function __get($lives)
 {
   return $this->lives;
