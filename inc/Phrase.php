@@ -12,7 +12,7 @@ public $phrases = [
             'Love without limits'
     ];
 
-//phrase creation
+//randomphrase creation
 public function __construct($phrase = null, $selected = [])
 {
 
@@ -46,7 +46,7 @@ public function addPhraseToDisplay()
    $output .= "</div>";
    return $output;
 }
-public function getLetterArray()
+public function getLetterArray()//phrase letters for selected letter comparison
 {
   return array_unique(str_split(str_replace(
              ' ',
@@ -54,7 +54,7 @@ public function getLetterArray()
              strtolower($this->currentPhrase)
     )));
 }
-public function checkLetter($letter)
+public function checkLetter($letter)//determines if selected letter is in phrase
 {
 if (in_array($letter, $this->getLetterArray())) {
     return true;
@@ -63,7 +63,7 @@ if (in_array($letter, $this->getLetterArray())) {
 }
 
 
-public function numberLost()
+public function numberLost()//drives lost lives
 {
   return count(array_diff($this->selected, $this->getLetterArray()));
 }

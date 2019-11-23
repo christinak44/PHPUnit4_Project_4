@@ -5,12 +5,12 @@
 
 :root {
   --color-win: #78CF82;
-  --color-lose: #D94545;
-  --color-start: #5b85b7;
+  --color-lose: #a60838;
+  --color-start: black;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
-  --color-keys: #37474F;
-  --color-keys-light: #E5E5E5;
+  --color-keys: white;
+  --color-keys-light: black;
   --font-size-large: 60px;
   --font-size-medium: 20px;
   --transition: all .2s ease-in-out;
@@ -48,7 +48,7 @@ h1 {
 
 button, input[type=submit] {
   margin: 6px;
-  border: 1px solid transparent;
+  border: 1px solid yellow;
   padding: .5rem 1rem;
   color: var(--color-keys);
   font-size: var(--font-size-medium);
@@ -61,9 +61,11 @@ button, input[type=submit] {
 }
 input[type=submit].incorrect {
   background-color: var(--color-lose);
+  border: 1px solid transparent;
 }
 input[type=submit].correct {
   background-color: var(--color-win);
+  border: 1px solid transparent;
 }
 
 #btn__reset {
@@ -78,6 +80,7 @@ input[type=submit].correct {
   height: 100%;
   max-height: 900px;
   text-align: center;
+  background-color: var(--color-start)
 }
 
 .section {
@@ -92,7 +95,7 @@ input[type=submit].correct {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: white;
 }
 
 
@@ -115,6 +118,8 @@ input[type=submit].correct {
 
 .hide {
   color: transparent;
+  background: black;
+  border: 1px solid white;
 }
 
 .show {

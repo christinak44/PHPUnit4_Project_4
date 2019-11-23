@@ -1,5 +1,5 @@
 <?php
-
+//activate browser persistance (keep track of current game and it's elements)
 session_start();
 if ($_POST['start']) {
     unset($_SESSION['selected']);
@@ -14,7 +14,7 @@ if (isset($_SESSION['selected']) && isset($_POST['key'])) {
     $_SESSION['selected'] = [];
 }
 
-
+//starts game seesion and pulls phrase
 $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
 $_SESSION['phrase'] =  $phrase->currentPhrase/*"start small"*/;
 $game = new Game($phrase);
@@ -32,7 +32,7 @@ $_SESSION['lives'] = $game->__get($lives);
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
-<body onkeydown='function(event)'>
+<body>
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
@@ -47,21 +47,22 @@ if (!ini_get('display_errors')) {
     ini_set('display_errors', '1');
 }
 
-echo ini_get('display_errors');
-  var_dump($game);
+//echo ini_get('display_errors');
+
   echo $phrase->addPhraseToDisplay();
   ?>
+<!--JavaScript code for activating physical keyboard play-->
 <script>
-document.onkeydown = function(event) {
+document.addEventListener('keydown', function(event) {
   var keys = document.getElementsByClassName('key');
-  for(i= 0; i < keys.length; i++) {
-      var key_press = String.fromCharCode(event.keyCode);
-      var key = keys[i].innnerText;
+  var key_press = event.key;
+  for(let i= 0; i <= keys.length -1; i++) {
+      let key = keys[i].value;
       if(key_press == key) {
         keys[i].click();
       }
   }
-}
+});
 </script>
   <!--<form method= 'POST' action='play.php'>-->
   <?php
@@ -70,7 +71,7 @@ document.onkeydown = function(event) {
   echo $game->displayKeyboard();
   echo $game->displayScore();
   echo $game->gameOver();
-  var_dump($game->checkForLose());
+
   ?>
 <!--</form>-->
 </div>

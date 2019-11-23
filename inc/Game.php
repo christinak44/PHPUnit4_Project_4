@@ -91,7 +91,7 @@ public function displayKeyboard()
    $this->html .= '</form>';
     return $this->html;*/
 }
-//creates visual of lives remaining
+//creates visual of lives remaining (tracks lives in play)
 public function displayScore()
 {
   $output = "";
@@ -99,19 +99,20 @@ public function displayScore()
         $output .= '<ol>';
 
           for ($i = 1; $i <= ($this->lives - $this->phrase->numberLost()); $i++) {
-                $output .= '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
+                $output .= '<li class="tries"><img src="images/heart_pixel_8_bits.jpg" height="75px" width="70px"></li>';
+//pixel heart image-->free wallpaper zedge.net
 
             }
                for ($i = 0; $i < $this->phrase->numberLost(); $i++){
-                   $output .= "<li class='tries'><img src='images/lostHeart.png' height='35px' width='30px'></li>";
-
+                   $output .= "<li class='tries'><img src='images/loseHeart.png' height='5px' width='0px'></li>";
+//"loseHeart" this is just an image of a black square to blend in with background
                }
 
 
         $output .= '</ol></div>';
 		return $output;
 }
-public function keyPress($letterKey)
+public function keyPress($letterKey) //identifies letters selected and marks wrong or right
 {
   if (!in_array($letterKey, $this->phrase->selected)){
       return "<input id='" . $letterKey . "' type='submit' button name='key' value='" . $letterKey ."' class='key'></button>";
@@ -126,7 +127,7 @@ public function keyPress($letterKey)
 
     }
 }
-public function checkForLose()
+public function checkForLose() //determines how many lives left and ends game if lives depleted
 {
   if ($this->lives == $this->phrase->numberLost()) {
       return true;
@@ -134,7 +135,7 @@ public function checkForLose()
           return false;
     }
 }
-public function checkForWin()
+public function checkForWin()// checks for puzzle solve if all selected letters match letters in phrase player wins
 {
   if (count(array_intersect($this->phrase->selected, $this->phrase->getLetterArray())) == count($this->phrase->getLetterArray())) {
       return true;
@@ -142,7 +143,7 @@ public function checkForWin()
           return false;
     }
 }
-public function gameOver()
+public function gameOver()// Game Over screen signals win/lose and displays phrase
 {
   if ($this->checkForLose() == true) {
     echo '<div id="overlay" class="lose a"><h1 id="game-over-message">The phrase was: "' . $this->phrase->currentPhrase . '"Better luck next time!</h1>';
@@ -156,7 +157,7 @@ public function gameOver()
     </form></div>';
   }
 }
-public function __get($lives)
+public function __get($lives)//pulls lives for display
 {
   return $this->lives;
 }
